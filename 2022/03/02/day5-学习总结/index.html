@@ -28,7 +28,7 @@
 <meta property="og:description" content="类的书写规则,构造函数,静态成员,this指针">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-02T07:42:58.000Z">
-<meta property="article:modified_time" content="2022-03-02T12:53:53.287Z">
+<meta property="article:modified_time" content="2022-03-02T13:19:22.416Z">
 <meta property="article:author" content="safekokori">
 <meta name="twitter:card" content="summary">
 
@@ -208,7 +208,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2022-03-02 15:42:58 / Modified: 20:53:53" itemprop="dateCreated datePublished" datetime="2022-03-02T15:42:58+08:00">2022-03-02</time>
+              <time title="Created: 2022-03-02 15:42:58 / Modified: 21:19:22" itemprop="dateCreated datePublished" datetime="2022-03-02T15:42:58+08:00">2022-03-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -225,7 +225,7 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
-              <span>3.1k</span>
+              <span>3.2k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -267,6 +267,9 @@
 </li>
 </ul>
 <p>构造函数可以根据参数列表重构</p>
+<p>当我们主动写了带参数的构造函数后,最好写一个不带参的或者为每个参数都提供了默认值的默认构造函数</p>
+<p>因为我们当用到该类作为数据类型的容器时,必须调用默认构造函数如</p>
+<p><code>vector &lt;className&gt; vec(10)</code>如果className没有默认构造函数会报错</p>
 <h1 id="mutable与const"><a href="#mutable与const" class="headerlink" title="mutable与const"></a>mutable与const</h1><p>用mutable修饰的数据成员,在任何时候(即使是const对象或是const函数中,都是可以改变它的)</p>
 <p>关于const可以修饰的类型:</p>
 <p>this指针(成员函数)/实例对象/类成员</p>
