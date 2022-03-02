@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="类的书写规则12345678910111213141516171819202122232425262728293031323334353637383940class Stack&amp;#123;friend void print(const Stack&amp;);friend returnType somefunc(Type);&#x2F;&#x2F;友元,做声明的外部函数可以访问privatefriend class">
+<meta property="og:type" content="article">
+<meta property="og:title" content="day5-学习总结">
+<meta property="og:url" content="http://example.com/2022/03/02/day5-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="类的书写规则12345678910111213141516171819202122232425262728293031323334353637383940class Stack&amp;#123;friend void print(const Stack&amp;);friend returnType somefunc(Type);&#x2F;&#x2F;友元,做声明的外部函数可以访问privatefriend class">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-02T07:42:58.000Z">
+<meta property="article:modified_time" content="2022-03-02T12:39:26.943Z">
+<meta property="article:author" content="safekokori">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/03/02/day5-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>day5-学习总结 | Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/02/day5-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="safekokori">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          day5-学习总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-02 15:42:58 / Modified: 20:39:26" itemprop="dateCreated datePublished" datetime="2022-03-02T15:42:58+08:00">2022-03-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%97%A5%E5%BF%97/" itemprop="url" rel="index"><span itemprop="name">日志</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              <span>3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              <span>3 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="类的书写规则"><a href="#类的书写规则" class="headerlink" title="类的书写规则"></a>类的书写规则</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Stack</span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">friend</span> <span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">const</span> Stack&amp;)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">friend</span> returnType <span class="title">somefunc</span><span class="params">(Type)</span></span>;</span><br><span class="line"><span class="comment">//友元,做声明的外部函数可以访问private</span></span><br><span class="line"><span class="keyword">friend</span> <span class="keyword">class</span> <span class="title class_">Stack_friend</span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">push</span><span class="params">(<span class="type">const</span> string&amp;)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">size</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> _stack.<span class="built_in">size</span>();&#125;<span class="comment">//内联函数</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">static</span> <span class="type">double</span> interrate;<span class="comment">//非const静态成员,必须在外部初始化</span></span><br><span class="line">    <span class="type">static</span> <span class="type">const</span> <span class="type">double</span> const_interrate = <span class="number">2</span>;<span class="comment">//const可以类内声明+初始化(c++11)</span></span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">double</span> <span class="title">rate</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> interrate;&#125;<span class="comment">//不传递this指针</span></span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">rate</span><span class="params">(<span class="type">double</span>)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">Stack</span>(vector&lt;string&gt;);<span class="comment">//构造函数</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;string&gt; _stack = &#123;<span class="string">&quot; &quot;</span>&#125;;</span><br><span class="line">&#125;;</span><br><span class="line">Stack::<span class="built_in">Stack</span>(vector&lt;string&gt; _stack)&#123;</span><br><span class="line">    _stack = &#123;<span class="string">&quot;null&quot;</span>&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//或者可以使用成员初始化列表</span></span><br><span class="line">Stack::<span class="built_in">Stack</span>(Stack &amp; rhs): _stack(rhs._stack)&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Stack::push</span><span class="params">(<span class="type">const</span> string&amp; elem)</span></span>&#123;</span><br><span class="line">    _stack.<span class="built_in">push_back</span>(elem);</span><br><span class="line">    <span class="type">double</span> rate = interrate;<span class="comment">//直接访问静态成员</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">const</span> Stack&amp; v)</span></span>&#123;...&#125;<span class="comment">//外部函数</span></span><br><span class="line"></span><br><span class="line"><span class="type">double</span> Stack::interrate = <span class="number">0.1</span>;<span class="comment">//必须在外部声明</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Stack::rate</span><span class="params">(<span class="type">double</span> newrate)</span></span>&#123;</span><br><span class="line">    interrate = newrate;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//外部访问静态成员</span></span><br><span class="line"><span class="type">double</span> rate = Stack::rate;</span><br><span class="line">Stack ac1;ac1-&gt;<span class="built_in">rate</span>();</span><br></pre></td></tr></table></figure>
+<h1 id="this指针"><a href="#this指针" class="headerlink" title="this指针"></a>this指针</h1><p>this指针在成员函数中用作指向调用者(对象)本身, 在调用时隐式的传递给了成员函数</p>
+<p>this是一个const指针,不允许改变本身所储存的地址,当然地址指向的位置是否可以改变(底层const)由自身决定</p>
+<p>这样我们就不能将一个普通的this绑定到一个const对象上,这样const对象是不能调用非const函数的</p>
+<p>所以我们可以const修饰this指针</p>
+<h2 id="我们复习一下常量指针"><a href="#我们复习一下常量指针" class="headerlink" title="我们复习一下常量指针:"></a>我们复习一下常量指针:</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> ival = <span class="number">1</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *ptr = &amp;ival;<span class="comment">//ptr指向const int型,而地址本身是可变的</span></span><br><span class="line"><span class="type">int</span> *<span class="type">const</span> ptr = &amp;ival;<span class="comment">//错误的,ptr是一个指向非常量的常量指针</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *<span class="type">const</span> ptr = &amp;ival;<span class="comment">//ptr存储地址本身不可变,也指向cosnt</span></span><br></pre></td></tr></table></figure>
+<p>我们称ptr本身不可变为顶层const,指向的类型为const为底层const,二者无任何关系</p>
+<p>回到this的问题上,this默认是顶层const的,要修饰为底层const以指向const对象:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">()</span> <span class="type">const</span> </span>&#123;&#125;; </span><br></pre></td></tr></table></figure>
+<p>也可以称为常量成员函数</p>
+<h2 id="返回this"><a href="#返回this" class="headerlink" title="返回this"></a>返回this</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">className&amp; <span class="title">className::func</span><span class="params">()</span></span>&#123;<span class="comment">//返回引用类型,而且是一个左值</span></span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很明显一个const成员函数将会返回const型引用,因为const修饰了this,其底层也是const的</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">const</span> className&amp; <span class="title">className::func</span><span class="params">()</span> <span class="type">const</span> </span>&#123;<span class="comment">//返回常量引用类型</span></span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="构造函数-成员初始化列表"><a href="#构造函数-成员初始化列表" class="headerlink" title="构造函数-成员初始化列表"></a>构造函数-成员初始化列表</h1><p>如上文有两种初始化形式,两种是可以混用的</p>
+<p>此外类内直接进行初始化也是可行的,构造函数会进行覆盖</p>
+<ul>
+<li><p>成员初始化列表可以初始化一些对象,也就是说类内嵌套着别的类,函数体内赋值是不能初始化的,尤其要注意<mark>string</mark></p>
+</li>
+<li><p>类中的<mark>const成员变量</mark>都要放在初始化列表之中进行</p>
+</li>
+</ul>
+<p>构造函数可以根据参数列表重构</p>
+<h1 id="mutable与const"><a href="#mutable与const" class="headerlink" title="mutable与const"></a>mutable与const</h1><p>用mutable修饰的数据成员,在任何时候(即使是const对象或是const函数中,都是可以改变它的)</p>
+<p>关于const可以修饰的类型:</p>
+<p>this指针(成员函数)/实例对象/类成员</p>
+<p>1）<strong>const成员函数</strong>可以访问<strong>非const对象的所有数据成员</strong>，也可以访问const对象内的所有数据成员；</p>
+<p>2）<strong>非const成员函数</strong>可以访问<strong>非const对象的所有数据成员</strong>，但<mark>不可以访问<em>const对象的任意数据成员</em></mark>；</p>
+<p><mark>反过来说, 非const对象可以访问任意成员函数,const对象只能访问const函数</mark></p>
+<p>3）同时出现时，非const对象优先调用非const成员函数。</p>
+<h1 id="基于const的二层重载"><a href="#基于const的二层重载" class="headerlink" title="基于const的二层重载"></a>基于const的二层重载</h1><p>我们经常需要一个const一个非const成员函数用于重载,但是显然我们不想写两遍</p>
+<p>那么两个函数同时引用一个private函数即可</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">screen</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">screen &amp; <span class="title">display</span><span class="params">(std::ostream &amp;os)</span></span></span><br><span class="line"><span class="function">    	</span>&#123;<span class="built_in">do_display</span>(os);<span class="keyword">return</span> *<span class="keyword">this</span>;&#125;</span><br><span class="line">    <span class="function"><span class="type">const</span> screen &amp; <span class="title">display</span><span class="params">(std::ostream &amp;os)</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">    	</span>&#123;<span class="built_in">do_display</span>(os);<span class="keyword">return</span> *<span class="keyword">this</span>;&#125;    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">do_display</span><span class="params">(std::ostream &amp;os)</span> <span class="type">const</span> 					</span>&#123;os&lt;&lt;contents;&#125;<span class="comment">//可以一次性修改实现</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样还可以解决另一个const问题:</p>
+<p>display()函数自然是不希望改变输入的,因此我们想到将其声明为const,但是同时我们希望他的返回*this不要是const的,这样普通的一层const是无法做到的</p>
+<p>因此我们嵌套了两层,第一层逻辑上只做调用第二层实现函数.第二层是const的</p>
+<p>我们观察:</p>
+<p>1) 当一个非const对象调用display时,将调用非常量的函数且返回一个非常量的引用;但是do_display将会<strong>接受this指针;然后将指针隐式转换为const</strong></p>
+<p>2) 当一个const对象调用display,只能调用常量函数且返回常量引用;do_display也将接受常量this指针<br>3) 最终,将会获得与对象类型一致的返回类型且实现内部都是const的;并且不需要多处复制修改</p>
+<h1 id="static"><a href="#static" class="headerlink" title="static"></a>static</h1><p>如果一个类中说明了静态数据成员，只有在这个类的第一个对象被创建时被初始化，自第二个对象起均不作初始化。</p>
+<p><strong>静态函数仅可以访问静态成员，或是静态成员函数或是静态数据成员。</strong>类的非静态成员函数却可以调用静态成员函数。</p>
+<p>静态数据成员可以在内部也可以在外部初始化,但是必须在类外部进行声明</p>
+<p>我们可以不依靠任何对象的使用静态成员函数/数据</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/01/day4-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" rel="prev" title="day4-学习总结">
+      <i class="fa fa-chevron-left"></i> day4-学习总结
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E4%B9%A6%E5%86%99%E8%A7%84%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">类的书写规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#this%E6%8C%87%E9%92%88"><span class="nav-number">2.</span> <span class="nav-text">this指针</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E4%BB%AC%E5%A4%8D%E4%B9%A0%E4%B8%80%E4%B8%8B%E5%B8%B8%E9%87%8F%E6%8C%87%E9%92%88"><span class="nav-number">2.1.</span> <span class="nav-text">我们复习一下常量指针:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%94%E5%9B%9Ethis"><span class="nav-number">2.2.</span> <span class="nav-text">返回this</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0-%E6%88%90%E5%91%98%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8"><span class="nav-number">3.</span> <span class="nav-text">构造函数-成员初始化列表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mutable%E4%B8%8Econst"><span class="nav-number">4.</span> <span class="nav-text">mutable与const</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Econst%E7%9A%84%E4%BA%8C%E5%B1%82%E9%87%8D%E8%BD%BD"><span class="nav-number">5.</span> <span class="nav-text">基于const的二层重载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#static"><span class="nav-number">6.</span> <span class="nav-text">static</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">safekokori</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">safekokori</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="Symbols count total">10k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">9 mins.</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/33.2017.summer.normal.2.model.json"},"display":{"position":"left","width":200,"height":390},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
