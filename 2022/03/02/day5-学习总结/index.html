@@ -28,7 +28,7 @@
 <meta property="og:description" content="类的书写规则,构造函数,静态成员,this指针">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-02T07:42:58.000Z">
-<meta property="article:modified_time" content="2022-03-02T13:19:22.416Z">
+<meta property="article:modified_time" content="2022-03-02T13:39:35.085Z">
 <meta property="article:author" content="safekokori">
 <meta name="twitter:card" content="summary">
 
@@ -208,7 +208,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2022-03-02 15:42:58 / Modified: 21:19:22" itemprop="dateCreated datePublished" datetime="2022-03-02T15:42:58+08:00">2022-03-02</time>
+              <time title="Created: 2022-03-02 15:42:58 / Modified: 21:39:35" itemprop="dateCreated datePublished" datetime="2022-03-02T15:42:58+08:00">2022-03-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -225,13 +225,13 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
-              <span>3.2k</span>
+              <span>4.3k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
-              <span>3 mins.</span>
+              <span>4 mins.</span>
             </span>
 
         </div>
@@ -270,6 +270,20 @@
 <p>当我们主动写了带参数的构造函数后,最好写一个不带参的或者为每个参数都提供了默认值的默认构造函数</p>
 <p>因为我们当用到该类作为数据类型的容器时,必须调用默认构造函数如</p>
 <p><code>vector &lt;className&gt; vec(10)</code>如果className没有默认构造函数会报错</p>
+<h2 id="explicit"><a href="#explicit" class="headerlink" title="explicit"></a>explicit</h2><p><strong>隐式类型转换</strong> (<strong>构造函数的隐式调用</strong>)</p>
+<p>先来看一下这种隐式类型转换是怎么发生的</p>
+<p>当一个实参传给displayPoint时,编译器调用了构造函数,并且以实参为构造函数参数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Point</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> x, y;</span><br><span class="line">    <span class="built_in">Point</span>(<span class="type">int</span> x = <span class="number">0</span>, <span class="type">int</span> y = <span class="number">0</span>)</span><br><span class="line">        : <span class="built_in">x</span>(x), <span class="built_in">y</span>(y) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">displayPoint</span><span class="params">(<span class="type">const</span> Point&amp; p)</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;(&quot;</span> &lt;&lt; p.x &lt;&lt; <span class="string">&quot;,&quot;</span> </span><br><span class="line">         &lt;&lt; p.y &lt;&lt; <span class="string">&quot;)&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;<span class="comment">//输出(1, 0)</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">displayPoint</span>(<span class="number">1</span>);<span class="comment">//发生了隐式类型转换</span></span><br><span class="line">    Point p = <span class="number">1</span>;<span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们定义了一个再简单不过的<code>Point</code>类, 它的构造函数使用了默认参数. 这时主函数里的两句话都会触发该构造函数的隐式调用. (如果构造函数不使用默认参数, 会在编译时报错)</p>
+<p>显然, 函数<code>displayPoint</code>需要的是<code>Point</code>类型的参数, 而我们传入的是一个<code>int</code>, 这个程序却能成功运行, 就是因为这隐式调用. 另外说一句, 在对象刚刚定义时, 即使你使用的是赋值操作符<code>=</code>, 也是会调用构造函数, 而不是重载的<code>operator=</code>运算符.</p>
+<p>这样悄悄发生的事情, 有时可以带来便利, 而有时却会带来意想不到的后果. <code>explicit</code>关键字用来避免这样的情况发生.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Point</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> x, y;</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Point</span><span class="params">(<span class="type">int</span> x = <span class="number">0</span>, <span class="type">int</span> y = <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function">        : x(x), y(y) &#123;</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">displayPoint</span><span class="params">(<span class="type">const</span> Point&amp; p)</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;(&quot;</span> &lt;&lt; p.x &lt;&lt; <span class="string">&quot;,&quot;</span> </span><br><span class="line">         &lt;&lt; p.y &lt;&lt; <span class="string">&quot;)&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">displayPoint</span>(<span class="built_in">Point</span>(<span class="number">1</span>));<span class="comment">//</span></span><br><span class="line">    <span class="function">Point <span class="title">p</span><span class="params">(<span class="number">1</span>)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然即使这样我们仍然可以使用强制类型转换将1转为Point类类型</p>
+<p>c风格</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Point(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>c++风格</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">static_cast</span>&lt;Point&gt; (<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>为了防止问题, 最后加<code>explicit</code>,当需要的时候进行显式的转换</p>
 <h1 id="mutable与const"><a href="#mutable与const" class="headerlink" title="mutable与const"></a>mutable与const</h1><p>用mutable修饰的数据成员,在任何时候(即使是const对象或是const函数中,都是可以改变它的)</p>
 <p>关于const可以修饰的类型:</p>
 <p>this指针(成员函数)/实例对象/类成员</p>
@@ -367,7 +381,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E4%B9%A6%E5%86%99%E8%A7%84%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">类的书写规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#this%E6%8C%87%E9%92%88"><span class="nav-number">2.</span> <span class="nav-text">this指针</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E4%BB%AC%E5%A4%8D%E4%B9%A0%E4%B8%80%E4%B8%8B%E5%B8%B8%E9%87%8F%E6%8C%87%E9%92%88"><span class="nav-number">2.1.</span> <span class="nav-text">我们复习一下常量指针:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%94%E5%9B%9Ethis"><span class="nav-number">2.2.</span> <span class="nav-text">返回this</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0-%E6%88%90%E5%91%98%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8"><span class="nav-number">3.</span> <span class="nav-text">构造函数-成员初始化列表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mutable%E4%B8%8Econst"><span class="nav-number">4.</span> <span class="nav-text">mutable与const</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Econst%E7%9A%84%E4%BA%8C%E5%B1%82%E9%87%8D%E8%BD%BD"><span class="nav-number">5.</span> <span class="nav-text">基于const的二层重载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#static"><span class="nav-number">6.</span> <span class="nav-text">static</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E4%B9%A6%E5%86%99%E8%A7%84%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">类的书写规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#this%E6%8C%87%E9%92%88"><span class="nav-number">2.</span> <span class="nav-text">this指针</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E4%BB%AC%E5%A4%8D%E4%B9%A0%E4%B8%80%E4%B8%8B%E5%B8%B8%E9%87%8F%E6%8C%87%E9%92%88"><span class="nav-number">2.1.</span> <span class="nav-text">我们复习一下常量指针:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%94%E5%9B%9Ethis"><span class="nav-number">2.2.</span> <span class="nav-text">返回this</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0-%E6%88%90%E5%91%98%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8"><span class="nav-number">3.</span> <span class="nav-text">构造函数-成员初始化列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#explicit"><span class="nav-number">3.1.</span> <span class="nav-text">explicit</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mutable%E4%B8%8Econst"><span class="nav-number">4.</span> <span class="nav-text">mutable与const</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Econst%E7%9A%84%E4%BA%8C%E5%B1%82%E9%87%8D%E8%BD%BD"><span class="nav-number">5.</span> <span class="nav-text">基于const的二层重载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#static"><span class="nav-number">6.</span> <span class="nav-text">static</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -432,12 +446,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">10k</span>
+    <span title="Symbols count total">11k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">9 mins.</span>
+    <span title="Reading time total">10 mins.</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
