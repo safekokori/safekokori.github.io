@@ -303,6 +303,25 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+		<div id="skPlayer"></div>
+<script src="http://www.chengfeilong.com/skPlayer/dist/skPlayer.min.js"></script>    
+<script>    
+	var player = new skPlayer({
+	autoplay: false,
+    listshow: false,
+    mode: 'listloop',
+    music: {
+        type: 'file',
+        source: [
+            {
+                name: '有人',
+                author: '赵钶',
+                src: 'C:\Users\24583\Music\赵钶 - 有人.flac',
+                cover: 'C:\Users\24583\Music\赵钶_有人_4.jpg'
+            },
+        ]
+    }
+});
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -353,12 +372,15 @@
           <i class="fa fa-arrow-up"></i>
           <span>0%</span>
         </div>
-
+	</div>
+	</iframe>
+	</div>
     </div>
   </aside>
   <div id="sidebar-dimmer"></div>
 
 
+		
       </div>
     </main>
 
@@ -465,21 +487,24 @@ window.darkmode = darkmode;
 darkmode.showWidget();
 </script>
 
+	
       <!-- Canvas -->
     <div class="Canvas"  id="L2dCanvas"></div>
     <script>
         var config = {
             width: 700,
             height: 700,
-            left: '-100px',
-            bottom: '-200px',
+            left: '-60px',
+            bottom: '-130px',
             basePath: 'https://cdn.jsdelivr.net/gh/alg-wiki/AzurLaneL2DViewer@gh-pages/assets',
-            role: 'weiyan_2',
+            role: 'nengdai_2',
             background: null,
             opacity: 1,
-            mobile: false
+            mobile: true
         }
         var v = new Viewer(config); 
     </script>
+
+</script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/33.2018.spring.model.json"},"display":{"position":"right","width":200,"height":390},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

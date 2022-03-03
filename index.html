@@ -193,7 +193,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2022-03-03 09:13:05 / Modified: 09:13:52" itemprop="dateCreated datePublished" datetime="2022-03-03T09:13:05+08:00">2022-03-03</time>
+              <time title="Created: 2022-03-03 09:13:05 / Modified: 20:58:36" itemprop="dateCreated datePublished" datetime="2022-03-03T09:13:05+08:00">2022-03-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -210,7 +210,7 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
-              <span>0</span>
+              <span>132</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -228,7 +228,43 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h1 id="顺序容器库"><a href="#顺序容器库" class="headerlink" title="顺序容器库"></a>顺序容器库</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">vector</td>
+<td>快速随机访问,尾部增删</td>
+</tr>
+<tr>
+<td style="text-align:left">list</td>
+<td>双向列表,双向顺序访问,中间位置增删</td>
+</tr>
+<tr>
+<td style="text-align:left">forward_list</td>
+<td>单向列表,单向顺序访问,中间位置增删</td>
+</tr>
+<tr>
+<td style="text-align:left">array</td>
+<td>固定大小数组不能增删</td>
+</tr>
+<tr>
+<td style="text-align:left">string</td>
+<td>与vector类似,储存字符专用</td>
+</tr>
+<tr>
+<td style="text-align:left">deque</td>
+<td>双端队列,快速随机访问,头尾增删</td>
+</tr>
+</tbody>
+</table>
+</div>
+
       
     </div>
 
@@ -910,6 +946,25 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+		<div id="skPlayer"></div>
+<script src="http://www.chengfeilong.com/skPlayer/dist/skPlayer.min.js"></script>    
+<script>    
+	var player = new skPlayer({
+	autoplay: false,
+    listshow: false,
+    mode: 'listloop',
+    music: {
+        type: 'file',
+        source: [
+            {
+                name: '有人',
+                author: '赵钶',
+                src: 'C:\Users\24583\Music\赵钶 - 有人.flac',
+                cover: 'C:\Users\24583\Music\赵钶_有人_4.jpg'
+            },
+        ]
+    }
+});
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -959,12 +1014,15 @@
           <i class="fa fa-arrow-up"></i>
           <span>0%</span>
         </div>
-
+	</div>
+	</iframe>
+	</div>
     </div>
   </aside>
   <div id="sidebar-dimmer"></div>
 
 
+		
       </div>
     </main>
 
@@ -1071,21 +1129,24 @@ window.darkmode = darkmode;
 darkmode.showWidget();
 </script>
 
+	
       <!-- Canvas -->
     <div class="Canvas"  id="L2dCanvas"></div>
     <script>
         var config = {
             width: 700,
             height: 700,
-            left: '-100px',
-            bottom: '-200px',
+            left: '-60px',
+            bottom: '-130px',
             basePath: 'https://cdn.jsdelivr.net/gh/alg-wiki/AzurLaneL2DViewer@gh-pages/assets',
-            role: 'weiyan_2',
+            role: 'nengdai_2',
             background: null,
             opacity: 1,
-            mobile: false
+            mobile: true
         }
         var v = new Viewer(config); 
     </script>
+
+</script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/33.2018.spring.model.json"},"display":{"position":"right","width":200,"height":390},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
