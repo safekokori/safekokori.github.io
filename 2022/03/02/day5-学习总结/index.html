@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+</script>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -28,7 +29,7 @@
 <meta property="og:description" content="类的书写规则,构造函数,静态成员,this指针">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-02T07:42:58.000Z">
-<meta property="article:modified_time" content="2022-03-02T13:39:35.085Z">
+<meta property="article:modified_time" content="2022-03-03T05:43:57.752Z">
 <meta property="article:author" content="safekokori">
 <meta name="twitter:card" content="summary">
 
@@ -53,29 +54,17 @@
 
 
 
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
+      <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- Live2DCubismCore -->
+    <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/frame/live2dcubismcore.min.js"></script>
+    <!-- Include Pixi. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.1/pixi.min.js"></script>
+    <!-- Include Cubism Components. -->
+    <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/live2dcubismframework.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/live2dcubismpixi.js"></script>
+    <!-- User's Script -->
+    <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/l2d.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/main.js"></script>
 <style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -206,10 +195,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-03-02 15:42:58 / Modified: 21:39:35" itemprop="dateCreated datePublished" datetime="2022-03-02T15:42:58+08:00">2022-03-02</time>
+              <time title="Created: 2022-03-02 15:42:58" itemprop="dateCreated datePublished" datetime="2022-03-02T15:42:58+08:00">2022-03-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-03-03 13:43:57" itemprop="dateModified" datetime="2022-03-03T13:43:57+08:00">2022-03-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -245,7 +240,7 @@
       
         <p>类的书写规则,构造函数,静态成员,this指针</p>
 <span id="more"></span>
-<h1 id="类的书写规则"><a href="#类的书写规则" class="headerlink" title="类的书写规则"></a>类的书写规则</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Stack</span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">friend</span> <span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">const</span> Stack&amp;)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">friend</span> returnType <span class="title">somefunc</span><span class="params">(Type)</span></span>;</span><br><span class="line"><span class="comment">//友元,做声明的外部函数可以访问private</span></span><br><span class="line"><span class="keyword">friend</span> <span class="keyword">class</span> <span class="title class_">Stack_friend</span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">push</span><span class="params">(<span class="type">const</span> string&amp;)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">size</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> _stack.<span class="built_in">size</span>();&#125;<span class="comment">//内联函数</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">static</span> <span class="type">double</span> interrate;<span class="comment">//非const静态成员,必须在外部初始化</span></span><br><span class="line">    <span class="type">static</span> <span class="type">const</span> <span class="type">double</span> const_interrate = <span class="number">2</span>;<span class="comment">//const可以类内声明+初始化(c++11)</span></span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">double</span> <span class="title">rate</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> interrate;&#125;<span class="comment">//不传递this指针</span></span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">rate</span><span class="params">(<span class="type">double</span>)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">Stack</span>(vector&lt;string&gt;);<span class="comment">//构造函数</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;string&gt; _stack = &#123;<span class="string">&quot; &quot;</span>&#125;;</span><br><span class="line">&#125;;</span><br><span class="line">Stack::<span class="built_in">Stack</span>(vector&lt;string&gt; _stack)&#123;</span><br><span class="line">    _stack = &#123;<span class="string">&quot;null&quot;</span>&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//或者可以使用成员初始化列表</span></span><br><span class="line">Stack::<span class="built_in">Stack</span>(Stack &amp; rhs): _stack(rhs._stack)&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Stack::push</span><span class="params">(<span class="type">const</span> string&amp; elem)</span></span>&#123;</span><br><span class="line">    _stack.<span class="built_in">push_back</span>(elem);</span><br><span class="line">    <span class="type">double</span> rate = interrate;<span class="comment">//直接访问静态成员</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">const</span> Stack&amp; v)</span></span>&#123;...&#125;<span class="comment">//外部函数</span></span><br><span class="line"></span><br><span class="line"><span class="type">double</span> Stack::interrate = <span class="number">0.1</span>;<span class="comment">//必须在外部声明</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Stack::rate</span><span class="params">(<span class="type">double</span> newrate)</span></span>&#123;</span><br><span class="line">    interrate = newrate;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//外部访问静态成员</span></span><br><span class="line"><span class="type">double</span> rate = Stack::rate;</span><br><span class="line">Stack ac1;ac1-&gt;<span class="built_in">rate</span>();</span><br></pre></td></tr></table></figure>
+<h1 id="类的书写规则"><a href="#类的书写规则" class="headerlink" title="类的书写规则"></a>类的书写规则</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Stack</span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">friend</span> <span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">const</span> Stack&amp;)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">friend</span> returnType <span class="title">somefunc</span><span class="params">(Type)</span></span>;</span><br><span class="line"><span class="comment">//友元,做声明的外部函数可以访问private</span></span><br><span class="line"><span class="keyword">friend</span> <span class="keyword">class</span> <span class="title class_">Stack_friend</span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">push</span><span class="params">(<span class="type">const</span> string&amp;)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">size</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> _stack.<span class="built_in">size</span>();&#125;<span class="comment">//内联函数</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">static</span> <span class="type">double</span> interrate;<span class="comment">//非const静态成员,必须在外部初始化</span></span><br><span class="line">    <span class="type">static</span> <span class="keyword">constexpr</span> <span class="type">const</span> <span class="type">double</span> const_interrate = <span class="number">2</span>;<span class="comment">//constexpr可以类内声明+初始化(c++11)</span></span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">double</span> <span class="title">rate</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> interrate;&#125;<span class="comment">//不传递this指针</span></span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">rate</span><span class="params">(<span class="type">double</span>)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">Stack</span>(vector&lt;string&gt;);<span class="comment">//构造函数</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;string&gt; _stack = &#123;<span class="string">&quot; &quot;</span>&#125;;</span><br><span class="line">&#125;;</span><br><span class="line">Stack::<span class="built_in">Stack</span>(vector&lt;string&gt; _stack)&#123;</span><br><span class="line">    _stack = &#123;<span class="string">&quot;null&quot;</span>&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//或者可以使用成员初始化列表</span></span><br><span class="line">Stack::<span class="built_in">Stack</span>(Stack &amp; rhs): _stack(rhs._stack)&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Stack::push</span><span class="params">(<span class="type">const</span> string&amp; elem)</span></span>&#123;</span><br><span class="line">    _stack.<span class="built_in">push_back</span>(elem);</span><br><span class="line">    <span class="type">double</span> rate = interrate;<span class="comment">//直接访问静态成员</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">const</span> Stack&amp; v)</span></span>&#123;...&#125;<span class="comment">//外部函数</span></span><br><span class="line"></span><br><span class="line"><span class="type">double</span> Stack::interrate = <span class="number">0.1</span>;<span class="comment">//必须在外部声明</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Stack::rate</span><span class="params">(<span class="type">double</span> newrate)</span></span>&#123;</span><br><span class="line">    interrate = newrate;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//外部访问静态成员</span></span><br><span class="line"><span class="type">double</span> rate = Stack::rate;</span><br><span class="line">Stack ac1;ac1-&gt;<span class="built_in">rate</span>();</span><br></pre></td></tr></table></figure>
 <h1 id="this指针"><a href="#this指针" class="headerlink" title="this指针"></a>this指针</h1><p>this指针在成员函数中用作指向调用者(对象)本身, 在调用时隐式的传递给了成员函数</p>
 <p>this是一个const指针,不允许改变本身所储存的地址,当然地址指向的位置是否可以改变(底层const)由自身决定</p>
 <p>这样我们就不能将一个普通的this绑定到一个const对象上,这样const对象是不能调用非const函数的</p>
@@ -261,10 +256,9 @@
 <h1 id="构造函数-成员初始化列表"><a href="#构造函数-成员初始化列表" class="headerlink" title="构造函数-成员初始化列表"></a>构造函数-成员初始化列表</h1><p>如上文有两种初始化形式,两种是可以混用的</p>
 <p>此外类内直接进行初始化也是可行的,构造函数会进行覆盖</p>
 <ul>
-<li><p>成员初始化列表可以初始化一些对象,也就是说类内嵌套着别的类,函数体内赋值是不能初始化的,尤其要注意<mark>string</mark></p>
-</li>
-<li><p>类中的<mark>const成员变量</mark>都要放在初始化列表之中进行</p>
-</li>
+<li>成员初始化列表可以初始化一些对象</li>
+<li>类中的<mark>const成员变量,引用</mark>都要放在初始化列表之中进行</li>
+<li>列表是初始化,函数体内是赋值</li>
 </ul>
 <p>构造函数可以根据参数列表重构</p>
 <p>当我们主动写了带参数的构造函数后,最好写一个不带参的或者为每个参数都提供了默认值的默认构造函数</p>
@@ -322,7 +316,10 @@
     <a href="/2022/03/01/day4-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" rel="prev" title="day4-学习总结">
       <i class="fa fa-chevron-left"></i> day4-学习总结
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/03/day6-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" rel="next" title="day6-学习总结">
+      day6-学习总结 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -395,7 +392,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -429,7 +426,7 @@
     </main>
 
     <footer class="footer">
-      <div class="footer-inner">
+	  <div class="footer-inner">
         
 
         
@@ -465,7 +462,7 @@
 
 
 
-      </div>
+	  </div>
     </footer>
   </div>
 
@@ -531,5 +528,21 @@ window.darkmode = darkmode;
 darkmode.showWidget();
 </script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/33.2017.summer.normal.2.model.json"},"display":{"position":"left","width":200,"height":390},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+      <!-- Canvas -->
+    <div class="Canvas"  id="L2dCanvas"></div>
+    <script>
+        var config = {
+            width: 400,
+            height: 400,
+            left: '0px',
+            bottom: '0px',
+            basePath: 'https://cdn.jsdelivr.net/gh/alg-wiki/AzurLaneL2DViewer@gh-pages/assets',
+            role: 'weiyan_2',
+            background: null,
+            opacity: 1,
+            mobile: false
+        }
+        var v = new Viewer(config); 
+    </script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/33.2018.spring.model.json"},"display":{"position":"left","width":200,"height":390},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
