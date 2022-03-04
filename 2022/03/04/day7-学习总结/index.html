@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+</script>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="顺序容器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="day7-学习总结">
+<meta property="og:url" content="http://example.com/2022/03/04/day7-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="顺序容器">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-04T06:10:35.000Z">
+<meta property="article:modified_time" content="2022-03-04T09:27:37.117Z">
+<meta property="article:author" content="safekokori">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/03/04/day7-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>day7-学习总结 | Blog</title>
+  
+
+
+
+
+
+
+      <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- Live2DCubismCore -->
+    <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/frame/live2dcubismcore.min.js"></script>
+    <!-- Include Pixi. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.1/pixi.min.js"></script>
+    <!-- Include Cubism Components. -->
+    <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/live2dcubismframework.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/live2dcubismpixi.js"></script>
+    <!-- User's Script -->
+    <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/l2d.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/main.js"></script>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/04/day7-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="safekokori">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          day7-学习总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-04 14:10:35 / Modified: 17:27:37" itemprop="dateCreated datePublished" datetime="2022-03-04T14:10:35+08:00">2022-03-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%97%A5%E5%BF%97/" itemprop="url" rel="index"><span itemprop="name">日志</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              <span>2.7k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>顺序容器</p>
+<span id="more"></span>
+<h1 id="容器迭代器"><a href="#容器迭代器" class="headerlink" title="容器迭代器"></a>容器迭代器</h1><p>迭代器范围[begin, end)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(begin != end)&#123;</span><br><span class="line">	*begin = val;</span><br><span class="line">    ++begin;</span><br><span class="line">&#125;</span><br><span class="line">list&lt;string&gt;::iterator iter  = a.<span class="built_in">begin</span>();</span><br><span class="line">list&lt;string&gt;::cosnt_iterator iter2  = a.<span class="built_in">cbegin</span>();</span><br><span class="line"><span class="keyword">auto</span> iter3  = a.<span class="built_in">cbegin</span>();<span class="comment">//auto最好的应用之一就是迭代器</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="stl-array"><a href="#stl-array" class="headerlink" title="stl array"></a>stl array</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">array&lt;type, size&gt;;</span><br><span class="line">array&lt;<span class="type">int</span>, 10&gt; arr1 = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;;</span><br><span class="line">array&lt;<span class="type">int</span>, 10&gt; arr2 = &#123;<span class="number">0</span>&#125;<span class="comment">//剩余的为0</span></span><br></pre></td></tr></table></figure>
+<h1 id="与assign与swap"><a href="#与assign与swap" class="headerlink" title="=与assign与swap"></a>=与assign与swap</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr1 = arr2;<span class="comment">//替换为右侧容器</span></span><br><span class="line">vec1 = &#123;a,b,c&#125;;<span class="comment">//其他容器可以赋予花括号列表</span></span><br><span class="line">arr1 = &#123;<span class="number">1</span>,<span class="number">2</span>&#125;<span class="comment">//错误的</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//assign不适用关联容器和array</span></span><br><span class="line">seq.<span class="built_in">assign</span>(iter1, iter2);<span class="comment">//iter1/2是另一个容器的迭代器,将范围内的元素替换掉seq原有元素</span></span><br><span class="line">seq.<span class="built_in">assign</span>(il);<span class="comment">//替换为初始化列表il</span></span><br><span class="line">seq.<span class="built_in">assign</span>(n,value);<span class="comment">//替换为n个value</span></span><br></pre></td></tr></table></figure>
+<h2 id="swap"><a href="#swap" class="headerlink" title="swap"></a>swap</h2><p>swap不会导致指向容器的指针/容器/迭代器失效(array和string除外)</p>
+<p>例如本来指向<code>vec1[2]</code>, swap后会指向<code>vec2[2]</code></p>
+<p><code>swap(vec1, vec2);</code></p>
+<h1 id="大小比较操作"><a href="#大小比较操作" class="headerlink" title="大小比较操作"></a>大小比较操作</h1><p>都支持比较操作符,只能比相同容器相同类型</p>
+<ul>
+<li>相同size且两两对应相等才相等</li>
+<li>size不同,但是每个对应元素都相等, size大的更大</li>
+<li>两个不同size的比较,取决于<mark>第一个不同的元素的比较</mark></li>
+</ul>
+<p>这种比较是基于元素类型本身的运算符的, 如果类型不支持这些也就无法进行</p>
+<p>因此对自己的类定义比较运算符有很大的意义</p>
+<h1 id="顺序容器插入元素"><a href="#顺序容器插入元素" class="headerlink" title="顺序容器插入元素"></a>顺序容器插入元素</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">push_back</span>(val);</span><br><span class="line"><span class="built_in">push_front</span>(val);<span class="comment">//仅list/forward_list/deque支持</span></span><br><span class="line"><span class="built_in">insert</span>(iter, value);</span><br><span class="line"><span class="comment">//插入iter之前,返回指向新元素的迭代器</span></span><br><span class="line"><span class="comment">//vector/ deque/list/ string. 注意forward不使用insert函数</span></span><br><span class="line"><span class="built_in">insert</span>(iter, num, value);<span class="comment">//iter前插入10个value</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; v = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">slist.<span class="built_in">insert</span>(slist.iter, v.<span class="built_in">end</span>()<span class="number">-1</span>, v.<span class="built_in">end</span>());<span class="comment">//输入另一个容器的迭代器</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="访问元素"><a href="#访问元素" class="headerlink" title="访问元素"></a>访问元素</h1><p><mark>首先必须检查是否含有元素<code>.empty()</code></mark></p>
+<ul>
+<li><code>c.back()</code>返回c的尾元素引用, forward_list不支持</li>
+<li><code>c.front</code>返回c的首元素引用</li>
+<li><code>c[n]</code>,<code>c.at(n)</code>适用于string/vector/deque/array </li>
+<li><code>.at(n)</code>可以在越界时报错</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!c.<span class="built_in">empty</span>())&#123;</span><br><span class="line">    c.<span class="built_in">front</span>() = <span class="number">42</span>;</span><br><span class="line">    <span class="keyword">auto</span> &amp;v = c.<span class="built_in">back</span>();</span><br><span class="line">    v = <span class="number">1024</span>;<span class="comment">//改变c</span></span><br><span class="line">    <span class="keyword">auto</span> val = c.<span class="built_in">back</span>();<span class="comment">//val是一个拷贝而非引用</span></span><br><span class="line">    val = <span class="number">10</span>;<span class="comment">//不改变c</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">const</span> vector&lt;<span class="type">int</span>&gt; <span class="title">vec</span><span class="params">(<span class="number">5</span>,<span class="number">33</span>)</span></span>;</span><br><span class="line"><span class="type">const</span> <span class="keyword">auto</span> &amp;v = vec.<span class="built_in">back</span>();<span class="comment">//返回const引用</span></span><br><span class="line"><span class="keyword">auto</span> &amp;v = vec.<span class="built_in">back</span>();<span class="comment">//返回非const引用</span></span><br></pre></td></tr></table></figure>
+<h2 id="关于auto与const-amp"><a href="#关于auto与const-amp" class="headerlink" title="关于auto与const/&amp;"></a>关于auto与const/&amp;</h2><p>如上面所见, 只使用auto时会去除<mark>引用/&amp;</mark>和<mark>const</mark>语义</p>
+<p>需要显式的把&amp;和const加上才行</p>
+<ul>
+<li>而加上&amp;后会保留const语义, 但是加const不会保留&amp;</li>
+</ul>
+<h1 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//全部适用于array</span></span><br><span class="line"><span class="comment">//forward不支持pop_back()和erase();</span></span><br><span class="line"><span class="comment">//vector和stirng不支持pop_front()</span></span><br><span class="line"><span class="built_in">pop_back</span>();<span class="comment">//返回void</span></span><br><span class="line"><span class="built_in">pop_front</span>();<span class="comment">//返回void</span></span><br><span class="line">c.<span class="built_in">erase</span>(p);<span class="comment">//迭代器.返回指向被删元素后元素的迭代器</span></span><br><span class="line">c.<span class="built_in">erase</span>(b,e);<span class="comment">//迭代器位置</span></span><br><span class="line">c.<span class="built_in">clear</span>();</span><br></pre></td></tr></table></figure>
+<h1 id="改变容器大小-resize"><a href="#改变容器大小-resize" class="headerlink" title="改变容器大小-resize"></a>改变容器大小-resize</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">list&lt;<span class="type">int</span>&gt; <span class="title">ilist</span><span class="params">(<span class="number">10</span>,<span class="number">42</span>)</span></span>;</span><br><span class="line">ilist.<span class="built_in">resize</span>(<span class="number">15</span>);<span class="comment">//将5个0添加到末尾</span></span><br><span class="line">ilist.<span class="built_in">resize</span>(<span class="number">15</span>,<span class="number">-1</span>);<span class="comment">//将5个-1添加到末尾</span></span><br><span class="line">ilist.<span class="built_in">resize</span>(<span class="number">5</span>);<span class="comment">//末尾删除10个元素</span></span><br></pre></td></tr></table></figure>
+<h2 id="forward-list"><a href="#forward-list" class="headerlink" title="forward_list"></a>forward_list</h2><p>用到在看,先跳过</p>
+<h1 id="迭代器失效问题"><a href="#迭代器失效问题" class="headerlink" title="迭代器失效问题"></a>迭代器失效问题</h1><p>添加或删除元素时, vector/string/deque的迭代器会发生失效</p>
+<p>对于list和forward_list只会导致增删位置失效</p>
+<p>虽然deque会有些许不同,最好能必须保证每次循环步中重新更新迭代器</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> vector&lt;<span class="type">int</span>&gt; Vec;</span><br><span class="line"><span class="keyword">typedef</span> vector&lt;<span class="type">int</span>&gt;::iterator VecIt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">deleteValueFromVector</span><span class="params">(Vec &amp;v, <span class="type">int</span> n = <span class="number">5</span>)</span></span>&#123;</span><br><span class="line">	VecIt it;</span><br><span class="line">	<span class="keyword">for</span>(it = v.<span class="built_in">begin</span>(); it != v.<span class="built_in">end</span>(); it++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="number">0</span> == *it % n)&#123;</span><br><span class="line">			v.<span class="built_in">erase</span>(it);<span class="comment">//出现错误</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在删除it指向后,迭代器失效,重新分配内存, it已经失效</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">deleteValueFromVector</span><span class="params">(Vec &amp;v, <span class="type">int</span> n = <span class="number">5</span>)</span></span>&#123;</span><br><span class="line">	VecIt it;</span><br><span class="line">	<span class="keyword">for</span>(it = v.<span class="built_in">begin</span>(); it != v.<span class="built_in">end</span>(); )&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="number">0</span> == *it % n)&#123;</span><br><span class="line">			it = v.<span class="built_in">erase</span>(it);<span class="comment">//更新,erase返回删除后下一个迭代器</span></span><br><span class="line">		&#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            it++;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>insert()返回新添加元素的迭代器,注意是插入到iter前,所以本质上前移了一位,如果it++可能导致永远在初始iter</li>
+<li>也就是说在有增删操作后, 注意有迭代器参与的条件语句</li>
+<li>迭代器尽量随用随取, 不要跨太远后再用</li>
+</ul>
+<h1 id="容器适配器"><a href="#容器适配器" class="headerlink" title="容器适配器"></a>容器适配器</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">stack&lt;string, vector&lt;string&gt;&gt; <span class="built_in">str_string</span>(svec);</span><br><span class="line">str_string.<span class="built_in">push</span>(item);<span class="comment">//压栈</span></span><br><span class="line">str_string.<span class="built_in">pop</span>();<span class="comment">//删除栈顶</span></span><br><span class="line">str_string.<span class="built_in">top</span>();<span class="comment">//返回栈顶元素</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/03/day6-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" rel="prev" title="day6-学习总结">
+      <i class="fa fa-chevron-left"></i> day6-学习总结
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">容器迭代器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#stl-array"><span class="nav-number">2.</span> <span class="nav-text">stl array</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8Eassign%E4%B8%8Eswap"><span class="nav-number">3.</span> <span class="nav-text">&#x3D;与assign与swap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#swap"><span class="nav-number">3.1.</span> <span class="nav-text">swap</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%A7%E5%B0%8F%E6%AF%94%E8%BE%83%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">大小比较操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8%E6%8F%92%E5%85%A5%E5%85%83%E7%B4%A0"><span class="nav-number">5.</span> <span class="nav-text">顺序容器插入元素</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E5%85%83%E7%B4%A0"><span class="nav-number">6.</span> <span class="nav-text">访问元素</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Eauto%E4%B8%8Econst-amp"><span class="nav-number">6.1.</span> <span class="nav-text">关于auto与const&#x2F;&amp;</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0"><span class="nav-number">7.</span> <span class="nav-text">删除元素</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%94%B9%E5%8F%98%E5%AE%B9%E5%99%A8%E5%A4%A7%E5%B0%8F-resize"><span class="nav-number">8.</span> <span class="nav-text">改变容器大小-resize</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#forward-list"><span class="nav-number">8.1.</span> <span class="nav-text">forward_list</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98"><span class="nav-number">9.</span> <span class="nav-text">迭代器失效问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E9%80%82%E9%85%8D%E5%99%A8"><span class="nav-number">10.</span> <span class="nav-text">容器适配器</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">safekokori</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+		
+      </div>
+    </main>
+
+    <footer class="footer">
+	  <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">safekokori</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="Symbols count total">14k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">13 mins.</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+	  </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+	
+      <!-- Canvas -->
+    <div class="Canvas"  id="L2dCanvas"></div>
+    <script>
+        var config = {
+            width: 700,
+            height: 700,
+            left: '-90px',
+            bottom: '-140px',
+            basePath: 'https://cdn.jsdelivr.net/gh/alg-wiki/AzurLaneL2DViewer@gh-pages/assets',
+            role: 'nengdai_2',
+            background: null,
+            opacity: 1,
+            mobile: true
+        }
+        var v = new Viewer(config); 
+    </script>
+ 
+   
+</script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/33.2018.spring.model.json"},"display":{"position":"right","width":200,"height":390},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
