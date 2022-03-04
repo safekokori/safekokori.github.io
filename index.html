@@ -191,10 +191,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-03-03 09:13:05 / Modified: 21:30:35" itemprop="dateCreated datePublished" datetime="2022-03-03T09:13:05+08:00">2022-03-03</time>
+              <time title="Created: 2022-03-03 09:13:05" itemprop="dateCreated datePublished" datetime="2022-03-03T09:13:05+08:00">2022-03-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-03-04 13:36:46" itemprop="dateModified" datetime="2022-03-04T13:36:46+08:00">2022-03-04</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -210,7 +216,7 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
-              <span>578</span>
+              <span>582</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -228,46 +234,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <span id="more"></span>
-<h1 id="顺序容器库"><a href="#顺序容器库" class="headerlink" title="顺序容器库"></a>顺序容器库</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">vector</td>
-<td>快速随机访问,尾部增删</td>
-</tr>
-<tr>
-<td style="text-align:left">list</td>
-<td>双向列表,双向顺序访问,中间位置增删</td>
-</tr>
-<tr>
-<td style="text-align:left">forward_list</td>
-<td>单向列表,单向顺序访问,中间位置增删</td>
-</tr>
-<tr>
-<td style="text-align:left">array</td>
-<td>固定大小数组不能增删</td>
-</tr>
-<tr>
-<td style="text-align:left">string</td>
-<td>与vector类似,储存字符专用</td>
-</tr>
-<tr>
-<td style="text-align:left">deque</td>
-<td>双端队列,快速随机访问,头尾增删</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="hexo-moc3"><a href="#hexo-moc3" class="headerlink" title="hexo moc3"></a>hexo moc3</h1><p>在next layout layout.swig中增加</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">      <span class="comment">&lt;!-- Canvas --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;Canvas&quot;</span>  <span class="attr">id</span>=<span class="string">&quot;L2dCanvas&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> config = &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">width</span>: <span class="number">700</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">height</span>: <span class="number">700</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">left</span>: <span class="string">&#x27;-90px&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">bottom</span>: <span class="string">&#x27;-140px&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">basePath</span>: <span class="string">&#x27;https://cdn.jsdelivr.net/gh/alg-wiki/AzurLaneL2DViewer@gh-pages/assets&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">role</span>: <span class="string">&#x27;nengdai_2&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">background</span>: <span class="literal">null</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">opacity</span>: <span class="number">1</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">mobile</span>: <span class="literal">true</span></span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> v = <span class="keyword">new</span> <span class="title class_">Viewer</span>(config); </span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+          <p>moc3</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/03/day6-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
