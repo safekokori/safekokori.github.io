@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+</script>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="标准库bind函数1234auto newCallable &#x3D; bind(callable, argList);using namespace std::placeholders;auto check &#x3D; bind(check_size, _1, sz);&#x2F;&#x2F;_1是占位符&#x2F;&#x2F;表示sz是第二个参数, _2&#x2F;_3以此类推 bind生成一个可调用对象, 将check_size第二个参数绑定到sz的值,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="day9-学习总结">
+<meta property="og:url" content="http://example.com/2022/03/09/day9-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="标准库bind函数1234auto newCallable &#x3D; bind(callable, argList);using namespace std::placeholders;auto check &#x3D; bind(check_size, _1, sz);&#x2F;&#x2F;_1是占位符&#x2F;&#x2F;表示sz是第二个参数, _2&#x2F;_3以此类推 bind生成一个可调用对象, 将check_size第二个参数绑定到sz的值,">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-09T07:59:24.000Z">
+<meta property="article:modified_time" content="2022-03-09T10:02:15.121Z">
+<meta property="article:author" content="safekokori">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/03/09/day9-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>day9-学习总结 | Blog</title>
+  
+
+
+
+
+
+
+      <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- Live2DCubismCore -->
+    <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/frame/live2dcubismcore.min.js"></script>
+    <!-- Include Pixi. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.1/pixi.min.js"></script>
+    <!-- Include Cubism Components. -->
+    <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/live2dcubismframework.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/live2dcubismpixi.js"></script>
+    <!-- User's Script -->
+    <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/l2d.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/litstronger/live2d-moc3@master/js/main.js"></script>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/09/day9-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="safekokori">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          day9-学习总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-09 15:59:24 / Modified: 18:02:15" itemprop="dateCreated datePublished" datetime="2022-03-09T15:59:24+08:00">2022-03-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%97%A5%E5%BF%97/" itemprop="url" rel="index"><span itemprop="name">日志</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <span id="more"></span>
+<h1 id="标准库bind函数"><a href="#标准库bind函数" class="headerlink" title="标准库bind函数"></a>标准库bind函数</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> newCallable = <span class="built_in">bind</span>(callable, argList);</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std::placeholders;</span><br><span class="line"><span class="keyword">auto</span> check = <span class="built_in">bind</span>(check_size, _1, sz);<span class="comment">//_1是占位符</span></span><br><span class="line"><span class="comment">//表示sz是第二个参数, _2/_3以此类推</span></span><br></pre></td></tr></table></figure>
+<p>bind生成一个可调用对象, 将check_size第二个参数绑定到sz的值,  在泛型算法调用find_if的时候, 将string和sz传递给它. 注意参数是被拷贝到返回的新可调用对象的.</p>
+<p>有些类型是不能拷贝的,比如istream</p>
+<p>我们可以使用ref()或cref()包裹参数, 让其以引用或常量引用的形式绑定</p>
+<p>使用bind函数调换参数顺序</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sort</span>(words.<span class="built_in">begin</span>(), words.<span class="built_in">end</span>(), isshorter);</span><br><span class="line"><span class="built_in">sort</span>(words.<span class="built_in">begin</span>(), words.<span class="built_in">end</span>(), <span class="built_in">bind</span>(isshorter, _2, _1));</span><br><span class="line"><span class="comment">//调换了words输入的顺序,变为了isshorter(B,A)</span></span><br></pre></td></tr></table></figure>
+<h1 id="map和set"><a href="#map和set" class="headerlink" title="map和set"></a>map和set</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">map&lt;string, <span class="type">size_t</span>&gt; word_count;</span><br><span class="line">set&lt;string&gt; exclude = &#123;<span class="string">&quot;the&quot;</span>, <span class="string">&quot;of&quot;</span>, <span class="string">&quot;but&quot;</span>, <span class="string">&quot;and&quot;</span>&#125;;</span><br><span class="line">map&lt;string, string&gt; authors = &#123; &#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;A&quot;</span>&#125;,</span><br><span class="line">                                &#123;<span class="string">&quot;b&quot;</span>, <span class="string">&quot;B&quot;</span>&#125;,</span><br><span class="line">                                &#123;<span class="string">&quot;c&quot;</span>, <span class="string">&quot;C&quot;</span>&#125; &#125;;</span><br><span class="line"><span class="comment">//map/set要求关键字(key)是唯一的.</span></span><br><span class="line"><span class="comment">//multimap和multiset不是</span></span><br></pre></td></tr></table></figure>
+<p>map/set/multimap/multiset为有序关联容器</p>
+<p>有序容器的关键字类型必须定义有元素比较的方法, 必须定义一个严格弱序的<code>&lt;</code></p>
+<p>如我们定义一个sale_data类类型的multiset, 我们需要定义一个sale_data类类型的严格弱序</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">compareISBN</span><span class="params">(<span class="type">const</span> sale_data &amp;lhs, <span class="type">const</span> sale_data &amp; rhs)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> lhs.<span class="built_in">isbn</span>() &lt; lhs.<span class="built_in">isbn</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后将比较操作函数的指针传递给multiset,且用函数初始化对象</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">multiset&lt;sale_data, <span class="title">decltype</span><span class="params">(compareISBN)</span> *&gt; </span></span><br><span class="line"><span class="function">    <span class="title">bookstore</span><span class="params">(compareISBN)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>当然也可以使用无序容器</p>
+<h1 id="pair"><a href="#pair" class="headerlink" title="pair"></a>pair</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">pair&lt;T1, T2&gt; <span class="title">p</span><span class="params">(v1, v2)</span></span>;<span class="comment">//使用v1,v2初始化</span></span><br><span class="line">pair&lt;T1, T2&gt; p = &#123;v1,v2&#125;;</span><br><span class="line"><span class="built_in">make_pair</span>(v1, v2);<span class="comment">//从v1,v2默认推导来初始化pair</span></span><br><span class="line"></span><br><span class="line">pair.first; <span class="comment">//返回公有数据成员</span></span><br><span class="line">pair.second;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="关联容器操作"><a href="#关联容器操作" class="headerlink" title="关联容器操作"></a>关联容器操作</h1><p>域作用符提取成员type</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">map&lt;T1, T2&gt;::key_type;</span><br><span class="line">map&lt;T1, T2&gt;::mapped_type;</span><br><span class="line">set&lt;T&gt;::key_type;</span><br></pre></td></tr></table></figure>
+<p>map的迭代器指向一个pair</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> map_it = wordcount.<span class="built_in">begin</span>();</span><br><span class="line">map_it-&gt;first;map_it-&gt;second;</span><br><span class="line"><span class="comment">//可以改变元素但是不能改变关键字</span></span><br><span class="line">++map_it-&gt;first;<span class="comment">//错误的</span></span><br><span class="line">++map_it-&gt;second;</span><br></pre></td></tr></table></figure>
+<p>set的迭代器不允许改变</p>
+<h2 id="添加-删除元素"><a href="#添加-删除元素" class="headerlink" title="添加/删除元素"></a>添加/删除元素</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">c.<span class="built_in">insert</span>(v);</span><br><span class="line">c.<span class="built_in">emplace</span>(args);</span><br><span class="line">c.<span class="built_in">insert</span>(b,e);</span><br><span class="line">c.<span class="built_in">insert</span>(list);</span><br><span class="line"></span><br><span class="line">c.<span class="built_in">erase</span>(key_value);</span><br><span class="line">c.<span class="built_in">erase</span>(iter);</span><br><span class="line">c.<span class="built_in">erase</span>(b,e);</span><br></pre></td></tr></table></figure>
+<h2 id="下标操作"><a href="#下标操作" class="headerlink" title="下标操作"></a>下标操作</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">map_name[key_value] = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p>如果不存在这个key,则新建一个,可以这样给空map增加值</p>
+<ul>
+<li>如果不希望新增请使用find()</li>
+</ul>
+<p>显然下标操作会得到一个左值</p>
+<p><code>map_name.at(key)</code>则会在没有这个key时报错</p>
+<h2 id="访问元素"><a href="#访问元素" class="headerlink" title="访问元素"></a>访问元素</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c.<span class="built_in">find</span>(k);<span class="comment">//返回迭代器,指向第一个key为k的元素</span></span><br><span class="line">c.<span class="built_in">count</span>(k);<span class="comment">//返回k的数量</span></span><br><span class="line">c.<span class="built_in">lower_bound</span>(k);<span class="comment">//返回指向第一个关键字不小于k的元素</span></span><br><span class="line">c.<span class="built_in">upper_bound</span>(k);<span class="comment">//返回指向第一个关键字大于k的元素</span></span><br><span class="line">c.<span class="built_in">equal_range</span>(k);<span class="comment">//返回迭代器pair, 等于k的元素的范围 </span></span><br></pre></td></tr></table></figure>
+<p>如果是multiset, 相同key的会相邻储存,所以想find到所有符合的元素</p>
+<p>有两种方法</p>
+<ul>
+<li>使用<code>count()</code>和<code>find()</code>逐一迭代</li>
+<li>使用<code>lower_bound()</code>和<code>upper_bound()</code></li>
+<li>直接使用<code>equal_range()</code></li>
+</ul>
+<h1 id="无序容器"><a href="#无序容器" class="headerlink" title="无序容器"></a>无序容器</h1><p>unorder_map/unorder_set/unorder_multimap/unorder_multiset</p>
+<p>无序容器各种操作都与有序一致, 对于底层hash和桶的操作暂且不表</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/08/day8-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" rel="prev" title="day8-学习总结">
+      <i class="fa fa-chevron-left"></i> day8-学习总结
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E5%BA%93bind%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">标准库bind函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#map%E5%92%8Cset"><span class="nav-number">2.</span> <span class="nav-text">map和set</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pair"><span class="nav-number">3.</span> <span class="nav-text">pair</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">关联容器操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0-%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0"><span class="nav-number">4.1.</span> <span class="nav-text">添加&#x2F;删除元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E6%A0%87%E6%93%8D%E4%BD%9C"><span class="nav-number">4.2.</span> <span class="nav-text">下标操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E5%85%83%E7%B4%A0"><span class="nav-number">4.3.</span> <span class="nav-text">访问元素</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A0%E5%BA%8F%E5%AE%B9%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">无序容器</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">safekokori</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+		
+      </div>
+    </main>
+
+    <footer class="footer">
+	  <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">safekokori</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="Symbols count total">18k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">16 mins.</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+	  </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+	
+      <!-- Canvas -->
+    <div class="Canvas"  id="L2dCanvas"></div>
+    <script>
+        var config = {
+            width: 700,
+            height: 700,
+            left: '1200px',
+            bottom: '-180px',
+            basePath: 'https://cdn.jsdelivr.net/gh/alg-wiki/AzurLaneL2DViewer@gh-pages/assets',
+            role: 'dujiaoshou_4',
+            background: null,
+            opacity: 1,
+            mobile: true
+        }
+        var v = new Viewer(config); 
+    </script>
+ 
+   
+</script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/33.2018.spring.model.json"},"display":{"position":"left","width":250,"height":390},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

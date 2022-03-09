@@ -168,6 +168,218 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/09/day9-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="safekokori">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/09/day9-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">day9-学习总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-09 15:59:24 / Modified: 18:02:15" itemprop="dateCreated datePublished" datetime="2022-03-09T15:59:24+08:00">2022-03-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%97%A5%E5%BF%97/" itemprop="url" rel="index"><span itemprop="name">日志</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<h1 id="标准库bind函数"><a href="#标准库bind函数" class="headerlink" title="标准库bind函数"></a>标准库bind函数</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> newCallable = <span class="built_in">bind</span>(callable, argList);</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std::placeholders;</span><br><span class="line"><span class="keyword">auto</span> check = <span class="built_in">bind</span>(check_size, _1, sz);<span class="comment">//_1是占位符</span></span><br><span class="line"><span class="comment">//表示sz是第二个参数, _2/_3以此类推</span></span><br></pre></td></tr></table></figure>
+<p>bind生成一个可调用对象, 将check_size第二个参数绑定到sz的值,  在泛型算法调用find_if的时候, 将string和sz传递给它. 注意参数是被拷贝到返回的新可调用对象的.</p>
+<p>有些类型是不能拷贝的,比如istream</p>
+<p>我们可以使用ref()或cref()包裹参数, 让其以引用或常量引用的形式绑定</p>
+<p>使用bind函数调换参数顺序</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sort</span>(words.<span class="built_in">begin</span>(), words.<span class="built_in">end</span>(), isshorter);</span><br><span class="line"><span class="built_in">sort</span>(words.<span class="built_in">begin</span>(), words.<span class="built_in">end</span>(), <span class="built_in">bind</span>(isshorter, _2, _1));</span><br><span class="line"><span class="comment">//调换了words输入的顺序,变为了isshorter(B,A)</span></span><br></pre></td></tr></table></figure>
+<h1 id="map和set"><a href="#map和set" class="headerlink" title="map和set"></a>map和set</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">map&lt;string, <span class="type">size_t</span>&gt; word_count;</span><br><span class="line">set&lt;string&gt; exclude = &#123;<span class="string">&quot;the&quot;</span>, <span class="string">&quot;of&quot;</span>, <span class="string">&quot;but&quot;</span>, <span class="string">&quot;and&quot;</span>&#125;;</span><br><span class="line">map&lt;string, string&gt; authors = &#123; &#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;A&quot;</span>&#125;,</span><br><span class="line">                                &#123;<span class="string">&quot;b&quot;</span>, <span class="string">&quot;B&quot;</span>&#125;,</span><br><span class="line">                                &#123;<span class="string">&quot;c&quot;</span>, <span class="string">&quot;C&quot;</span>&#125; &#125;;</span><br><span class="line"><span class="comment">//map/set要求关键字(key)是唯一的.</span></span><br><span class="line"><span class="comment">//multimap和multiset不是</span></span><br></pre></td></tr></table></figure>
+<p>map/set/multimap/multiset为有序关联容器</p>
+<p>有序容器的关键字类型必须定义有元素比较的方法, 必须定义一个严格弱序的<code>&lt;</code></p>
+<p>如我们定义一个sale_data类类型的multiset, 我们需要定义一个sale_data类类型的严格弱序</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">compareISBN</span><span class="params">(<span class="type">const</span> sale_data &amp;lhs, <span class="type">const</span> sale_data &amp; rhs)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> lhs.<span class="built_in">isbn</span>() &lt; lhs.<span class="built_in">isbn</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后将比较操作函数的指针传递给multiset,且用函数初始化对象</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">multiset&lt;sale_data, <span class="title">decltype</span><span class="params">(compareISBN)</span> *&gt; </span></span><br><span class="line"><span class="function">    <span class="title">bookstore</span><span class="params">(compareISBN)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>当然也可以使用无序容器</p>
+<h1 id="pair"><a href="#pair" class="headerlink" title="pair"></a>pair</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">pair&lt;T1, T2&gt; <span class="title">p</span><span class="params">(v1, v2)</span></span>;<span class="comment">//使用v1,v2初始化</span></span><br><span class="line">pair&lt;T1, T2&gt; p = &#123;v1,v2&#125;;</span><br><span class="line"><span class="built_in">make_pair</span>(v1, v2);<span class="comment">//从v1,v2默认推导来初始化pair</span></span><br><span class="line"></span><br><span class="line">pair.first; <span class="comment">//返回公有数据成员</span></span><br><span class="line">pair.second;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="关联容器操作"><a href="#关联容器操作" class="headerlink" title="关联容器操作"></a>关联容器操作</h1><p>域作用符提取成员type</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">map&lt;T1, T2&gt;::key_type;</span><br><span class="line">map&lt;T1, T2&gt;::mapped_type;</span><br><span class="line">set&lt;T&gt;::key_type;</span><br></pre></td></tr></table></figure>
+<p>map的迭代器指向一个pair</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> map_it = wordcount.<span class="built_in">begin</span>();</span><br><span class="line">map_it-&gt;first;map_it-&gt;second;</span><br><span class="line"><span class="comment">//可以改变元素但是不能改变关键字</span></span><br><span class="line">++map_it-&gt;first;<span class="comment">//错误的</span></span><br><span class="line">++map_it-&gt;second;</span><br></pre></td></tr></table></figure>
+<p>set的迭代器不允许改变</p>
+<h2 id="添加-删除元素"><a href="#添加-删除元素" class="headerlink" title="添加/删除元素"></a>添加/删除元素</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">c.<span class="built_in">insert</span>(v);</span><br><span class="line">c.<span class="built_in">emplace</span>(args);</span><br><span class="line">c.<span class="built_in">insert</span>(b,e);</span><br><span class="line">c.<span class="built_in">insert</span>(list);</span><br><span class="line"></span><br><span class="line">c.<span class="built_in">erase</span>(key_value);</span><br><span class="line">c.<span class="built_in">erase</span>(iter);</span><br><span class="line">c.<span class="built_in">erase</span>(b,e);</span><br></pre></td></tr></table></figure>
+<h2 id="下标操作"><a href="#下标操作" class="headerlink" title="下标操作"></a>下标操作</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">map_name[key_value] = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p>如果不存在这个key,则新建一个,可以这样给空map增加值</p>
+<ul>
+<li>如果不希望新增请使用find()</li>
+</ul>
+<p>显然下标操作会得到一个左值</p>
+<p><code>map_name.at(key)</code>则会在没有这个key时报错</p>
+<h2 id="访问元素"><a href="#访问元素" class="headerlink" title="访问元素"></a>访问元素</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c.<span class="built_in">find</span>(k);<span class="comment">//返回迭代器,指向第一个key为k的元素</span></span><br><span class="line">c.<span class="built_in">count</span>(k);<span class="comment">//返回k的数量</span></span><br><span class="line">c.<span class="built_in">lower_bound</span>(k);<span class="comment">//返回指向第一个关键字不小于k的元素</span></span><br><span class="line">c.<span class="built_in">upper_bound</span>(k);<span class="comment">//返回指向第一个关键字大于k的元素</span></span><br><span class="line">c.<span class="built_in">equal_range</span>(k);<span class="comment">//返回迭代器pair, 等于k的元素的范围 </span></span><br></pre></td></tr></table></figure>
+<p>如果是multiset, 相同key的会相邻储存,所以想find到所有符合的元素</p>
+<p>有两种方法</p>
+<ul>
+<li>使用<code>count()</code>和<code>find()</code>逐一迭代</li>
+<li>使用<code>lower_bound()</code>和<code>upper_bound()</code></li>
+<li>直接使用<code>equal_range()</code></li>
+</ul>
+<h1 id="无序容器"><a href="#无序容器" class="headerlink" title="无序容器"></a>无序容器</h1><p>unorder_map/unorder_set/unorder_multimap/unorder_multiset</p>
+<p>无序容器各种操作都与有序一致, 对于底层hash和桶的操作暂且不表</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/08/day8-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="safekokori">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/08/day8-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">day8-学习总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-08 21:13:47 / Modified: 21:56:01" itemprop="dateCreated datePublished" datetime="2022-03-08T21:13:47+08:00">2022-03-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%97%A5%E5%BF%97/" itemprop="url" rel="index"><span itemprop="name">日志</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              <span>932</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<h1 id="向函数传递谓词-predicate"><a href="#向函数传递谓词-predicate" class="headerlink" title="向函数传递谓词(predicate)"></a>向函数传递谓词(predicate)</h1><p>向标准库泛型算法可以添加一个谓词</p>
+<p>标准库函数使用两种,分别是一元谓词和二元谓词</p>
+<p>一般的sort使用<code>&lt;</code>来比较元素, 我们使用一个比较字符长度的函数来代替</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isshorter</span><span class="params">(<span class="type">const</span> string &amp;s1, <span class="type">const</span> string &amp;s2)</span></span>&#123;</span><br><span class="line">    retrun s1.<span class="built_in">size</span>() &lt; s2.<span class="built_in">size</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">sort</span>(words.<span class="built_in">begin</span>(), words.<span class="built_in">end</span>(), isshorter);</span><br></pre></td></tr></table></figure>
+<h1 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[capture list] (parameter list) -&gt; <span class="keyword">return</span> type &#123;function body&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> f = [] &#123;<span class="keyword">return</span> <span class="number">42</span>;&#125;<span class="comment">//参数列表和返回类型可以省略</span></span><br><span class="line"><span class="comment">//只有一条return时自动推断,否则返回void</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> func = [](<span class="type">const</span> string &amp;s1, <span class="type">const</span> string &amp;s2)&#123;retrun s1.<span class="built_in">size</span>() &lt; s2.<span class="built_in">size</span>();&#125;</span><br><span class="line"><span class="built_in">sort</span>(words.<span class="built_in">begin</span>(), words.<span class="built_in">end</span>(), func);</span><br></pre></td></tr></table></figure>
+<h2 id="捕获列表"><a href="#捕获列表" class="headerlink" title="捕获列表"></a>捕获列表</h2><p><code>[]</code>可以捕获lambda所在函数的局部变量</p>
+<p>可以捕获引用, 也支持隐式捕获写成<code>[&amp;]</code>(全为引用形式)<code>[=]</code>全为值引用</p>
+<p>或是混合使用隐式捕获或显示捕获<code>[=, &amp;os, c]</code></p>
+<p>捕获列表可以解决需要多个参数, 但一员谓词只接受一个参数的情况</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">biggies</span><span class="params">(vector&lt;string&gt; &amp;words, 							vector&lt;string&gt;::size_type sz)</span></span>&#123;</span><br><span class="line">    <span class="built_in">elimDups</span>(words);</span><br><span class="line">    <span class="built_in">stable_sort</span>(words.begins, words.<span class="built_in">end</span>(), isshorter);</span><br><span class="line">    <span class="keyword">auto</span> wc = <span class="built_in">find_if</span>(words.begins, words.<span class="built_in">end</span>(),[sz](<span class="type">const</span> strinf &amp;a)&#123;<span class="keyword">return</span> a.size &gt;= sz;&#125;);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>find_if只接受一元谓词,返回第一个使谓词返回非0值的元素,如不存在返回尾迭代器</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/04/day7-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -893,94 +1105,11 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/24/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="safekokori">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/24/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-02-24 17:06:36" itemprop="dateCreated datePublished" datetime="2022-02-24T17:06:36+08:00">2022-02-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-25 23:56:03" itemprop="dateModified" datetime="2022-02-25T23:56:03+08:00">2022-02-25</time>
-              </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              <span>367</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-
-  </article>
-  
-  
-  
-
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 
 
@@ -1045,7 +1174,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1096,12 +1225,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">14k</span>
+    <span title="Symbols count total">18k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">13 mins.</span>
+    <span title="Reading time total">16 mins.</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
